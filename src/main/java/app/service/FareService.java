@@ -54,12 +54,6 @@ public class FareService {
 			// 引数の配列のサイズ検査
 			validateArraySize(distanceList, 2);
 			
-			/*
-			BigDecimal[] distances = new BigDecimal[distanceList.length];
-			for (int i = 0; i < distances.length; i++) {
-				distance1s[i] = BigDecimal.valueOf(distanceList[i]);
-			}
-			*/
 			BigDecimal distance1 = BigDecimal.valueOf(distanceList[0]);
 			BigDecimal distance2 = BigDecimal.valueOf(distanceList[1]);
 			BigDecimal distanceValue = distance1.subtract(distance2).abs();
