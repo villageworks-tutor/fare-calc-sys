@@ -24,9 +24,9 @@ CREATE TABLE pricing_scheme(
 /* テーブル名: 運賃 */
 /**********************************/
 CREATE TABLE fare(
-	code     VARCHAR(3)    NOT NULL,	
-	distance INTEGER NOT NULL,
-	value INTEGER NOT NULL
+	pricing_scheme VARCHAR(3)    NOT NULL,	
+	distance       NUMERIC(6, 2) NOT NULL,
+	value          INTEGER NOT NULL
 );
 
 /**********************************/
@@ -37,8 +37,8 @@ CREATE TABLE station(
 		code VARCHAR(2) NOT NULL,
 		pricing_scheme VARCHAR(3),
 		name VARCHAR(10) NOT NULL,
-		distance INTEGER NOT NULL,
-		total_distance INTEGER NOT NULL
+		distance NUMERIC(6, 2) NOT NULL,
+		total_distance NUMERIC(6, 2) NOT NULL
 );
 
 /**********************************/
@@ -48,7 +48,7 @@ CREATE TABLE ride(
 		id SERIAL,
 		boarding CHARACTER(12) NOT NULL,
 		distination CHARACTER(12) NOT NULL,
-		distance INTEGER NOT NULL,
+		distance NUMERIC(6, 2) NOT NULL,
 		fare INTEGER NOT NULL
 );
 
@@ -78,14 +78,14 @@ INSERT INTO pricing_scheme VALUES ('JRL', 'JR地方交通線');
 
 -- 駅マスタのサンプルレコード
 --：山手線
-INSERT INTO fare (code, distance, value) VALUES 
+INSERT INTO fare (pricing_scheme, distance, value) VALUES 
 	('JY', 3, 150), 
 	('JY', 6, 170), 
 	('JY', 10, 180), 
 	('JY', 15, 210), 
 	('JY', 20, 280);
 --：小田急本線
-INSERT INTO fare (code, distance, value) VALUES 
+INSERT INTO fare (pricing_scheme, distance, value) VALUES 
 	('OH', 3, 140), 
 	('OH', 6, 170), 
 	('OH', 9, 200), 
@@ -108,7 +108,7 @@ INSERT INTO fare (code, distance, value) VALUES
 	('OH', 83, 910);
 
 --：JR東京電車特定区間
-INSERT INTO fare (code, distance, value) VALUES 
+INSERT INTO fare (pricing_scheme, distance, value) VALUES 
 	('JRE', 3, 150), 
 	('JRE', 6, 170), 
 	('JRE', 10, 180), 
@@ -142,7 +142,7 @@ INSERT INTO fare (code, distance, value) VALUES
 	('JRE', 400, 6280);
 
 --：JR地方交通線
-INSERT INTO fare (code, distance, value) VALUES 
+INSERT INTO fare (pricing_scheme, distance, value) VALUES 
 	('JRL', 3, 150), 
 	('JRL', 6, 190), 
 	('JRL', 10, 210), 
