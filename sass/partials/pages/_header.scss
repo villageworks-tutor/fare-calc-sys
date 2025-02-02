@@ -1,0 +1,17 @@
+@charset "utf-8";
+@forward "../common/";
+@use "../common/" as common;
+
+.header {
+	background-color: common.$theme-header-bk;
+	&__title {
+		padding: common.sizeByScale($scale: 0.25) common.sizeByScale($scale: 0.75);
+		font-size: common.$font-size-h1;
+	}
+	&__version {
+		margin:0 0 0 common.sizeByScale(0.75);
+		font-family: common.$font-family-serif;
+		font-size: common.$font-size-default;
+		font-style: italic;
+	}
+}

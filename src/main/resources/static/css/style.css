@@ -1,0 +1,135 @@
+/*
+$theme-main: #A49592;
+$theme-sub: #727077;
+$theme-accent1: #EED8c9;
+$theme-accent2: #E99787;
+*/
+.ul__error {
+  color: tomato;
+}
+
+.ul_bold {
+  font-weight: bold;
+}
+
+.ul_small {
+  font-size: 80%;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+html body {
+  color: #517D99;
+  background-color: #BFE9DB;
+  width: 75%;
+  margin: 0 auto;
+  font-size: 1.4rem;
+}
+
+.header {
+  background-color: #6AC1B7;
+}
+.header__title {
+  padding: 0.35rem 1.05rem;
+  font-size: 1.61rem;
+}
+.header__version {
+  margin: 0 0 0 1.05rem;
+  font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+  font-size: 1.4rem;
+  font-style: italic;
+}
+
+.footer__content {
+  background-color: #6AC1B7;
+  padding: 0.35rem 1.05rem;
+  font-size: 1.26rem;
+  font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+}
+
+.main {
+  background-color: #DFEFED;
+  padding: 3.15rem 3.85rem;
+}
+
+.section__title {
+  color: steelblue;
+  background-color: #BFE9DB;
+  margin: 0 0 1.75rem 0;
+  padding: 0;
+  font-size: 1.75rem;
+}
+.section__result {
+  background-color: aliceblue;
+  margin: 1.05rem 0 0 0;
+  padding: 0.35rem 1.05rem 1.05rem;
+}
+
+.table {
+  border-collapse: collapse;
+}
+.table__form {
+  border: #6AC1B7 0 solid;
+}
+.table__list {
+  border: #6AC1B7 1px solid;
+}
+.table__header, .table__cell {
+  padding: 0.175rem 0.525rem;
+  border: #6AC1B7 1px solid;
+  text-align: center;
+}
+.table__header--borderless, .table__cell--borderless {
+  padding: 0.175rem 0.525rem;
+  text-align: center;
+}
+.table__header--submit, .table__cell--submit {
+  text-align: left;
+  padding: 0.7rem 0.7rem;
+}
+.table__header {
+  color: #517D99;
+  background-color: #BFE9DB;
+}
+.table__caption {
+  width: 7rem;
+  margin: 0 0 0.175rem 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.list__message--error {
+  color: tomato;
+  margin: 0 0 1.75rem 1.75rem;
+}
+
+.input__button {
+  color: #517D99;
+  background-color: #BFE9DB;
+  padding: 0.175rem 0.525rem;
+  border: #6AC1B7 1.75px solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.input__button:hover {
+  color: #DFEFED;
+  background-color: #6AC1B7;
+  font-weight: bold;
+}/*# sourceMappingURL=style.css.map */

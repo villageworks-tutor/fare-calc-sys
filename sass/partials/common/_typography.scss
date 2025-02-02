@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+// フォントのデフォルト値
+$font-size-scale: 62.5%;
+$font-size-default: 1.4rem;
+
+// フォント倍率
+$font-scale-h1: 1.15;
+$font-scale-h2: 1.25;
+$font-scale-copyright: 0.90;
+
+// フォントサイズ
+$font-size-h1: $font-size-default * $font-scale-h1;
+$font-size-h2: $font-size-default * $font-scale-h2;
+$font-size-copyright: $font-size-default * $font-scale-copyright;
+
+// フォントファミリのデフォルト値
+$font-family-sans:  "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+$font-family-serif: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;

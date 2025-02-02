@@ -1,0 +1,10 @@
+@charset "utf-8";
+@forward "./typography";
+@use "./typography" as typography;
+
+// **
+// * 文字サイズの倍率に応じたサイズを計算する：文字サイズのデフォルトは $font-size-deffault: 1.4rem
+// *
+@function sizeByScale($scale: 1.00) {
+	@return typography.$font-size-default * $scale;
+}
