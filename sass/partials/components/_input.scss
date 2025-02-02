@@ -1,0 +1,16 @@
+@charset "utf-8";
+@use "../common/" as common;
+
+.input {
+	&__button {
+		@include common.setForeToBackColor(common.$theme-font, common.$theme-section-header-bk);
+		padding: common.sizeByScale(0.125) common.sizeByScale(0.375);
+		border: common.$theme-border 1.75px solid;
+		border-radius: 5px;
+		cursor: pointer;
+		&:hover {
+			@include common.setForeToBackColor(common.$theme-accent2, common.$theme-header-bk);
+			font-weight: bold;
+		}
+	}
+}

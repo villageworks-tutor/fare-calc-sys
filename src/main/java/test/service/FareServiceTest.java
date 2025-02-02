@@ -82,7 +82,7 @@ class FareServiceTest {
 		// setup
 		Ticket target = new Ticket();
 		target.setBoarding(new Station("JU", "JRE", "上野"));
-		target.setDistination(new Station("JU", "JRE", "赤羽"));
+		target.setDestination(new Station("JU", "JRE", "赤羽"));
 		int expected = 180;
 		
 		// execute
