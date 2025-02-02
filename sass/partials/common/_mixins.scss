@@ -1,0 +1,21 @@
+@charset "utf-8";
+@use "./functions" as common;
+
+// **
+// * 上下と左右のパディングをショートハンドで指定する
+// * @param $vartical_padding   左右のパディング
+// * @param $horizontal_padding 上下のパディング
+// *
+@mixin setCellPadding($vartical_padding: 0.125, $horizontal_padding: 0.375) {
+	padding: common.sizeByScale($vartical_padding) common.sizeByScale($horizontal_padding);
+}
+
+// **
+// * 前景色（文字色）と背景色を設定する
+// * @param $fore_color 前景色（文字色）
+// * @param $back_color 背景色
+// *
+@mixin setForeToBackColor($fore_color: common.$theme-font, $back_color: common.$theme-header-bk) {
+	color: $fore_color;
+	background-color: $back_color;
+}
