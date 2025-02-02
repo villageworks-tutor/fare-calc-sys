@@ -1,6 +1,8 @@
 package app.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import app.bean.Fare;
 import app.bean.Station;
@@ -9,6 +11,38 @@ import app.dao.StationDAO;
 import app.model.Ticket;
 
 public class FareService {
+
+	/**
+	 * サービスを実行する
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @return 遷移先URL
+	 */	
+	public List<String> execute(Ticket ticket) {
+		// 駅存在検査
+		StationDAO dao = new StationDAO();
+		
+		// ロジック検査
+		List<String> messageList = new ArrayList<String>();
+		if (dao.findByCodeAndName(ticket.getBoarding().getCode(), ticket.getBoarding().getName()) == null) {
+			messageList.add("指定された乗車駅は指定された路線に見つかりませんでした。");
+		}
+		if (dao.findByCodeAndName(ticket.getDestination().getCode(), ticket.getDestination().getName()) == null) {
+			messageList.add("指定された降車駅は指定された路線に見つかりませんでした。");
+		}
+		
+		if (messageList.size() > 0) {
+			// エラーリストに要素がある場合
+			return messageList;
+		}
+		
+		// 運賃の計算
+		calcFare(ticket);
+		
+		return null;
+	}
+
+	
 
 	/**
 	 * 指定されたチケットの乗車区間の運賃を計算する
@@ -22,7 +56,7 @@ public class FareService {
 		// チケットから乗車駅と降車駅を取得
 		StationDAO stationDao = new StationDAO();
 		Station boardingStation = stationDao.findBySchemeAndName(target.getBoarding().getPricingScheme(), target.getBoarding().getName());
-		Station distinationStation = stationDao.findBySchemeAndName(target.getDistination().getPricingScheme(), target.getDistination().getName());
+		Station distinationStation = stationDao.findBySchemeAndName(target.getDestination().getPricingScheme(), target.getDestination().getName());
 		
 		// 乗車距離の計算
 		double[] distances = {boardingStation.getTotalDistance(), distinationStation.getTotalDistance()};
@@ -35,7 +69,7 @@ public class FareService {
 		
 		// チケットのフィールドを上書き
 		target.setBoarding(boardingStation);
-		target.setDistination(distinationStation);
+		target.setDestination(distinationStation);
 		target.setDistance(distance);
 		target.setFare(fareValue);
 		

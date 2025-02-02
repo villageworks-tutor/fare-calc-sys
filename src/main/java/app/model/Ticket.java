@@ -8,7 +8,7 @@ public class Ticket {
 	 * フィールド
 	 */
 	private Station boarding;    // 乗車駅
-	private Station distination; // 降車駅
+	private Station destination; // 降車駅
 	private double  distance;    // 乗車距離
 	private int fare;            // 運賃
 	
@@ -22,9 +22,9 @@ public class Ticket {
 	 * @param boarding    乗車駅
 	 * @param distination 降車駅
 	 */
-	public Ticket(Station boarding, Station distination) {
+	public Ticket(Station boarding, Station destination) {
 		this.boarding = boarding;
-		this.distination = distination;
+		this.destination = destination;
 	}
 
 	public Station getBoarding() {
@@ -35,12 +35,12 @@ public class Ticket {
 		this.boarding = boarding;
 	}
 
-	public Station getDistination() {
-		return distination;
+	public Station getDestination() {
+		return destination;
 	}
 
-	public void setDistination(Station distination) {
-		this.distination = distination;
+	public void setDestination(Station destination) {
+		this.destination = destination;
 	}
 
 	public double getDistance() {
@@ -61,7 +61,7 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [boarding=" + boarding + ", distination=" + distination + ", distance=" + distance + ", fare="
+		return "Ticket [boarding=" + boarding + ", destination=" + destination + ", distance=" + distance + ", fare="
 				+ fare + "]";
 	}
 	

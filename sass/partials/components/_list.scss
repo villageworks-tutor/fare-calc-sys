@@ -1,0 +1,19 @@
+@charset "utf-8";
+@use "../common/" as common;
+
+@mixin initListStyle() {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.list {
+	@include initListStyle();
+	&__message {
+		&--error {
+			color: common.$theme-error;
+			margin: 0 0 common.sizeByScale(1.25) common.sizeByScale(1.25);
+		}
+	}
+}
+

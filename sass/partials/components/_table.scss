@@ -1,0 +1,40 @@
+@charset "utf-8";
+@use "../common/" as common;
+
+@mixin setCellStyle($is_form: true) {
+	@include common.setCellPadding(0.125, 0.375);
+	@if ($is_form == true) {
+		border: common.$theme-border 1px solid;
+	}
+	text-align: center;
+}
+
+.table {
+	border-collapse: collapse;
+	&__form {
+		border: common.$theme-border 0 solid;
+	}
+	&__list {
+		border: common.$theme-border 1px solid;
+	}
+	&__header, &__cell {
+		@include setCellStyle(true);
+		&--borderless {
+			@include setCellStyle(false);
+		}
+		&--submit {
+			text-align: left;
+			@include common.setCellPadding(0.50, 0.5);
+		}
+	}
+	&__header {
+		@include common.setForeToBackColor($fore_color: common.$theme-font, $back_color: common.$theme-section-header-bk);
+	}
+	&__caption {
+		width: common.sizeByScale(5);
+    margin:0 0 common.sizeByScale(0.1250) 0;
+		font-weight: bold;
+		text-align: center;
+	}
+}
+

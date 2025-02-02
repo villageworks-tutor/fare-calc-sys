@@ -1,0 +1,18 @@
+@charset "utf-8";
+@forward "../common/";
+@use "../common/" as common;
+
+.section {
+	&__title {
+		color: steelblue;
+		background-color: common.$theme-section-header-bk;
+		margin: 0 0 common.sizeByScale(1.25) 0;
+		padding: 0;
+		font-size: common.$font-size-h2;
+	}
+	&__result {
+		background-color: aliceblue;
+		margin: common.sizeByScale(0.75) 0 0 0;
+		padding: common.sizeByScale(0.25) common.sizeByScale(0.75) common.sizeByScale(0.75);
+	}
+}

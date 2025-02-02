@@ -1,0 +1,6 @@
+@charset "utf-8";
+@forward "./partials/base/";
+@forward "./partials/pages/";
+@forward "./partials/components/";
+@use "./partials/common/" as common;
+

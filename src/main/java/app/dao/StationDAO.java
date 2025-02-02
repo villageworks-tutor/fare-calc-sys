@@ -24,6 +24,10 @@ public class StationDAO extends BaseDAO {
 		= "SELECT * FROM station "
 				+ "WHERE pricing_scheme = ? "
 				+ "AND name = ?";
+	private static final String SQL_FIND_BY_CODE_AND_NAME
+		= "SELECT * FROM station "
+				+ "WHERE code = ? "
+				+ "AND name = ?";
 	
 	/**
 	 * コンストラクタ
@@ -33,6 +37,27 @@ public class StationDAO extends BaseDAO {
 			Class.forName(JDBC_DRIVER);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public Object findByCodeAndName(String code, String name) {
+		// データベース接続オブジェクトとSQL実行オブジェクトを取得
+		try (Connection con = DriverManager.getConnection(DB_URL, DB_UESR, DB_PASSWORD);
+			 PreparedStatement pstmt = con.prepareStatement(SQL_FIND_BY_CODE_AND_NAME);
+			) {
+			// プレースホルダをパラメータで置換
+			pstmt.setString(1, code);
+			pstmt.setString(2, name);
+			// SQLの実行と結果セットの取得
+			try (ResultSet rs = pstmt.executeQuery();) {
+				// 戻り値を初期化
+				Station bean = convertToBean(rs);
+				// 戻り値の返却
+				return bean;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
@@ -207,5 +232,5 @@ public class StationDAO extends BaseDAO {
 		bean.setTotalDistance(rs.getDouble("total_distance"));
 		return bean;
 	}
-	
+
 }

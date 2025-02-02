@@ -1,0 +1,23 @@
+@charset "utf-8";
+@forward "../common/typography";
+@use "../common" as common;
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding:0;
+    box-sizing: inherit; 
+}
+
+html {
+	font-size: common.$font-size-scale;
+	body {
+    color: common.$theme-font;
+		background-color: common.$theme-back;
+		width: 75%;
+		margin: 0 auto;
+		font-size: common.$font-size-default;
+	}
+}
+
