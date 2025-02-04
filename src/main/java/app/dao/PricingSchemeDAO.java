@@ -5,10 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import app.bean.PricingScheme;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PricingSchemeDAO extends BaseDAO {
 	public PricingSchemeDAO() {
@@ -19,21 +17,21 @@ public class PricingSchemeDAO extends BaseDAO {
 		}
 	}
 
-	public List<PricingScheme> findAll() {
-		List<PricingScheme> list = new ArrayList<>();
+	public Map<String, String> findAll() {
+		Map<String, String> map = new HashMap<>();
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_UESR, DB_PASSWORD);
-			 PreparedStatement pstmt = con.prepareStatement("SELECT * FROM priving_scheme");
+			 PreparedStatement pstmt = con.prepareStatement("SELECT * FROM pricing_scheme ORDER BY code");
 			 ResultSet rs = pstmt.executeQuery();
 			) {
 			while (rs.next()) {
-				PricingScheme bean = new PricingScheme(rs.getString("code"), rs.getString("name"));
-				list.add(bean);
+				map.put(rs.getString("code"), rs.getString("name"));
 			}
-			return list;
+			return map;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return list;
+			return null;
 		}
 	}
+
 	
 }

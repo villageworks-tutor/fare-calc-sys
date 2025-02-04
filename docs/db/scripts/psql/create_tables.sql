@@ -72,6 +72,7 @@ INSERT INTO line VALUES ('OM', '小田急多摩線');
 
 -- 運賃体系マスタのサンプルレコード
 INSERT INTO pricing_scheme VALUES ('OH', '小田急本線');
+INSERT INTO pricing_scheme VALUES ('JY', '山手線');
 INSERT INTO pricing_scheme VALUES ('JRE', 'JR東京電車特別区');
 INSERT INTO pricing_scheme VALUES ('JRL', 'JR地方交通線');
 

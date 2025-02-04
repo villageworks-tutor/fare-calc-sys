@@ -1,6 +1,8 @@
 package app;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import app.bean.Line;
 import app.controller.FareController;
 
 /**
@@ -22,8 +25,25 @@ public class FareCalcSysServlet extends HttpServlet {
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
-	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
+	public void init() throws ServletException {
+		// アプリケーションスコープに路線コードリストが登録されている場合
+		if (getServletContext().getAttribute("lines") != null) {
+			// 処理せず終了
+			return;
+		}
+		// 路線コードリストを取得
+		FareController controller = new FareController();
+		List<Line> list = controller.prepareLines();
+		getServletContext().setAttribute("lines", list);
+		// アプリケーションスコープに運賃体系マップが登録されている場合
+		if (getServletContext().getAttribute("schemes") != null) {
+			// 処理せず終了
+			return;
+		}
+		// 運賃体系マップを取得
+		Map<String, String> fareSchemes = controller.prepareSchemes();
+		getServletContext().setAttribute("scheme", fareSchemes);
+		
 	}
 
 	/**
@@ -32,15 +52,15 @@ public class FareCalcSysServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// リクエストパラメータの文字コードを設定
 		request.setCharacterEncoding("utf-8");
-		// コンテキストパスとサーブレットパスを取得
-		String servletPath = request.getServletPath();
+		// actionパラメータを取得
+		String action = request.getParameter("action");
 		
 		// 遷移先URLの初期化
-		String nextURL = "index.jsp";
+		String nextURL = "/pages/calc.jsp";
 		
-		// サーブレットパスによって処理を分岐
-		if (servletPath != null && (!servletPath.isEmpty() && !servletPath.equals("/") )) {
-			FareController controller = new FareController();
+		// actionパラメータによって処理を分岐
+		if (action != null && !action.isEmpty()) {
+			FareController controller = new FareController(getServletContext());
 			nextURL = controller.execute(request, response);
 		}
 		
@@ -53,7 +73,6 @@ public class FareCalcSysServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

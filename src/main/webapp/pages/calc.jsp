@@ -1,11 +1,20 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="app.bean.Line"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>運賃計算システム</title>
+	<title>運賃算定システム</title>
+	<!-- コンテキストパスの宣言：絶対パスでURLを表示するためにあらかじめ宣言しておく -->
+	<base href="${pageContext.request.contextPath}/" />
 	<link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="content">
@@ -18,32 +27,52 @@
 		<article class="article">
 			<section class="section section__input">
 				<h2 class="section__title">乗車情報入力</h2>
+				<c:if test="${not empty errors}">
 				<ul class="list list__message--error">
-					<li>指定された乗車駅は指定された路線に見つかりませんでした。</li>
-					<li>指定された降車駅は指定された路線に見つかりませんでした。</li>
+					<c:forEach items="${errors}" var="error">
+					<li>${error}</li>
+					</c:forEach>
 				</ul>
+				</c:if>
 				<form class="form" action="calc" method="get">
+					<input type="hidden" name="action" value="calc" />
 					<table class="table table__form">
 						<tr class="table__row">
 							<th class="table__header--borderless">乗車駅</th>
 							<td class="table__cell--borderless">
 								<select name="boardingLine">
-									<option value="JY">JR山手線</option>
-									<option value="JU">JR宇都宮線</option>
-									<option value="OH">小田急線</option>
+									<c:forEach items="${lines}" var="line">
+										<c:choose>
+											<c:when test="${line.code eq ticket.boarding.code}">
+												<option value="${line.code}" selected>${line.name}</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${line.code}">${line.name}</option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 								</select>
-								<input class="input" type="text" name="boarding" placeholder="駅名を入力" />
+								<input class="input" type="text" name="boarding" value="${boarding}"
+								 placeholder="駅名を入力" />
 							</td>
 						</tr>
 						<tr class="table__row">
 							<th class="table__header--borderless">降車駅</th>
 							<td class="table__cell--borderless">
 								<select name="destinationLine">
-									<option value="JY">JR山手線</option>
-									<option value="JU">JR宇都宮線</option>
-									<option value="OH">小田急線</option>
+									<c:forEach items="${lines}" var="line">
+										<c:choose>
+											<c:when test="${line.code eq ticket.destination.code}">
+												<option value="${line.code}" selected>${line.name}</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${line.code}">${line.name}</option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 								</select>
-								<input class="input" type="text" name="destination" placeholder="駅名を入力" />
+								<input class="input" type="text" name="destination" value="${destination}"
+								 placeholder="駅名を入力" />
 							</td>
 						</tr>
 						<tr>
@@ -58,6 +87,7 @@
 				</form>
 			</section>
 			<section class="section section__result">
+				<c:if test="${not empty ticket}">
 				<table class="table table__list">
 					<caption class="table__caption">計算結果</caption>
 					<tr class="table__row">
@@ -68,21 +98,22 @@
 					</tr>
 					<tr class="table__row">
 						<td class="table__cell">
-							<span name="borading">東京</span>
-							（<span name="boarding_line">JR山手線</span>）
+							<span id="borading">${ticket.boarding.name}</span>
+							（<span id="boarding_line">${boardingLineName}</span>）
 						</td>
 						<td class="table__cell">
-							<span name="destination">高輪ゲートウェイ</span>
-							（<span name="destination_line">JR山手線</span>）
+							<span id="destination">${ticket.destination.name}</span>
+							（<span id="destination_line">${destinationLineName}</span>）
 						</td>
 						<td class="table__cell">
-							<span name="distance">5.9</span>km
+							<span id="distance">${ticket.distance}</span>km
 						</td>
 						<td class="table__cell">
-							<span name="fare">170</span>円
+							<span id="fare">${ticket.fare}</span>円
 						</td>
 					</tr>
 				</table>
+				</c:if>
 			</section>
 		</article>
 	</main>
