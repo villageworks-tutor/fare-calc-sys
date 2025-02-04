@@ -54,7 +54,7 @@ class FareServiceTest {
 			// Test12: （始発駅から終点駅までの場合）上野から大宮までの運賃は490円である
 			tickets.add(new Ticket(new Station("JU", "JRE", "上野"), new Station("JU", "JRE", "大宮")));
 			expecteds.add(490);
-			// Test13: （途中駅から終点駅までの場合）から浦和までの運賃は320円である
+			// Test13: （途中駅から終点駅までの場合）尾久から浦和までの運賃は320円である
 			tickets.add(new Ticket(new Station("JU", "JRE", "尾久"), new Station("JU", "JRE", "大宮")));
 			expecteds.add(410);
 			// Test14: （途中駅から途中駅までの場合）尾久から浦和までの運賃は320円である

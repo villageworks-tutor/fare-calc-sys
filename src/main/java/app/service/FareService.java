@@ -3,31 +3,32 @@ package app.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import app.bean.Fare;
+import app.bean.Line;
 import app.bean.Station;
 import app.dao.FareDAO;
+import app.dao.LineDAO;
+import app.dao.PricingSchemeDAO;
 import app.dao.StationDAO;
 import app.model.Ticket;
 
 public class FareService {
 
 	/**
-	 * サービスを実行する
+	 * 運賃算定サービスを実行する
 	 * @param request  HttpServletRequest
 	 * @param response HttpServletResponse
 	 * @return 遷移先URL
 	 */	
 	public List<String> execute(Ticket ticket) {
-		// 駅存在検査
-		StationDAO dao = new StationDAO();
-		
 		// ロジック検査
 		List<String> messageList = new ArrayList<String>();
-		if (dao.findByCodeAndName(ticket.getBoarding().getCode(), ticket.getBoarding().getName()) == null) {
+		if (ticket.getBoarding() == null) {
 			messageList.add("指定された乗車駅は指定された路線に見つかりませんでした。");
 		}
-		if (dao.findByCodeAndName(ticket.getDestination().getCode(), ticket.getDestination().getName()) == null) {
+		if (ticket.getDestination() == null) {
 			messageList.add("指定された降車駅は指定された路線に見つかりませんでした。");
 		}
 		
@@ -39,7 +40,7 @@ public class FareService {
 		// 運賃の計算
 		calcFare(ticket);
 		
-		return null;
+		return messageList;
 	}
 
 	
@@ -109,6 +110,20 @@ public class FareService {
 		if (distanceList.length != length) {
 			throw new IllegalAccessException("distanceList must contain at least two elements.");
 		}
+	}
+
+	public List<Line> findAllLine() {
+		LineDAO dao = new LineDAO();
+		List<Line> list = dao.findAll();
+		return list;
+	}
+
+
+
+	public Map<String, String> findAllScheme() {
+		PricingSchemeDAO dao = new PricingSchemeDAO();
+		Map<String, String> map = dao.findAll();
+		return map;
 	}
 
 }

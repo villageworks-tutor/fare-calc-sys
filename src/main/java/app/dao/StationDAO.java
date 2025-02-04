@@ -40,7 +40,13 @@ public class StationDAO extends BaseDAO {
 		}
 	}
 	
-	public Object findByCodeAndName(String code, String name) {
+	/**
+	 * 路線コードと駅名から駅を取得する
+	 * @param code 路線コード
+	 * @param name 駅名
+	 * @return 路線コードと駅名が一致した駅がある場合は駅クラスのインスタンス、それ以外はnull
+	 */
+	public Station findByCodeAndName(String code, String name) {
 		// データベース接続オブジェクトとSQL実行オブジェクトを取得
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_UESR, DB_PASSWORD);
 			 PreparedStatement pstmt = con.prepareStatement(SQL_FIND_BY_CODE_AND_NAME);
@@ -63,7 +69,7 @@ public class StationDAO extends BaseDAO {
 	
 	/**
 	 * 指定した運賃体系かつ駅名の駅を取得する
-	 * @param scheme 運賃体系
+	 * @param scheme 運賃体系コード
 	 * @param name   駅名
 	 * @return 駅クラスのインスタンス
 	 */
